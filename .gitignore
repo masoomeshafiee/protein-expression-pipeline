@@ -25,7 +25,7 @@ dist/
 
 # Ignore all Data
 data/*
-!data/raw/.gitkeep
+
 
 
 # keep everything in the example directory
@@ -33,7 +33,7 @@ example/*.gitkeep
 
 # Output and metadata
 output/*
-!output/.gitkeep
+
 
 # Ignore user-specific config
 config.json
