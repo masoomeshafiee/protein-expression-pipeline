@@ -1,0 +1,42 @@
+# Bytecode and temp files
+__pycache__/
+*.py[cod]
+*.log
+
+# OS/IDE stuff
+.DS_Store
+.vscode/
+Icon?
+Thumbs.db
+
+# Virtual environment
+protein-expression-env/
+.env
+
+# Python packaging
+*.egg-info/
+build/
+dist/
+
+# Cache
+.cache/
+*.mypy_cache/
+*.pytest_cache/
+
+# Ignore all Data
+data/*
+!data/raw/.gitkeep
+
+
+# keep everything in the example directory
+example/*.gitkeep
+
+# Output and metadata
+output/*
+!output/.gitkeep
+
+# Ignore user-specific config
+config.json
+
+# Jupyter checkpoints if any
+.ipynb_checkpoints/

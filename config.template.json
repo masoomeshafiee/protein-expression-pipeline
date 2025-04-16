@@ -1,0 +1,50 @@
+{ 
+  "pipeline_version": "v1.0",
+  "Path_settings": {
+    "input_dir": "/Users/masoomeshafiee/Projects/protein-expression-pipeline/data/raw",
+    "GFP_dir": "/Users/masoomeshafiee/Projects/protein-expression-pipeline/data/GFP",
+    "RFP_dir": "/Users/masoomeshafiee/Projects/protein-expression-pipeline/data/RFP",
+    "projected_dir": "/Users/masoomeshafiee/Projects/protein-expression-pipeline/data/projected",
+    "mask_dir": "/Users/masoomeshafiee/Projects/protein-expression-pipeline/data/mask",
+    "output_dir":"/Users/masoomeshafiee/Projects/protein-expression-pipeline/output",
+    "output_name":"processed_data.csv",
+    "GFP_suffix" : "_GFP.TIF",
+    "RFP_suffix" : "_RFP.TIF",
+    "projection_suffix":"_GFP_projection.TIF",
+    "mask_suffix": "_GFP_projection_cp_masks.png",
+    "protein_name": "Rfa1",
+    "condition": "untreated"
+  },
+
+  "active_slice_settings":{
+    "plot_intensity_profile": false,
+    "drop_threshold":90
+  },
+  
+  "Analysis_settings": {
+    "rg":9.390, 
+    "ra":1.137,
+    "single_mNG_intensity":710.90
+  },
+
+  "stats_summary": true,
+  "plot_copy_number": true,
+  
+  "Plot_settings": {
+    "bins": 20,
+    "color": "skyblue",
+    "edgecolor": "black",
+    "alpha": 0.7,
+    "kde": false,
+    "histogram_legend": "Copy number histogram",
+    "fit_legend": "Normal fit",
+    "title": "Copy Number Distribution",
+    "title_fontsize": 16,
+    "xlabel": "Copy Number",
+    "x_fontsize": 14,
+    "ylabel": "Frequency",
+    "y_fontsize": 14,
+    "add_legened": true
+  }
+  }
+  
