@@ -116,6 +116,10 @@ Fix:
 - Check for typos in config.json under Path_settings.
 
 #### 7. Environment & Dependencies
+🔸 Issue: Conda taking forever to create the env
+Fix:
+- Try mamba instead: mamba env create -f environment.yml  
+
 🔸 Issue: ModuleNotFoundError
 Cause: Required packages are missing.
 Fix:
