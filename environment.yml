@@ -1,18 +1,18 @@
 name: protein-expression-env
 channels:
-  - defaults
   - conda-forge
+  - defaults
 dependencies:
   - python=3.9.6
-  - numpy=2.0.2
-  - pandas=2.2.3
-  - matplotlib=3.9.4
-  - seaborn=0.13.2
-  - scipy=1.13.1
-  - tifffile=2024.8.30
-  - imageio=2.37.0
-  - tqdm=4.67.1
-  - pillow=11.1.0
+  - numpy
+  - pandas
+  - matplotlib
+  - seaborn
+  - scipy
+  - tifffile
+  - imageio
+  - tqdm
+  - pillow
   - pip
   - pip:
       - trackpy
