@@ -26,6 +26,12 @@
     "ra":1.137,
     "single_mNG_intensity":710.90
   },
+  "get_single_mNG_intensity":{
+  "integrated_intensity_analysis": true,
+  "data_path": "/Users/masoomeshafiee/Downloads/Results_1_20251007_Nup59_mNG_25_laser",
+  "column_name": "Intens",
+  "output_dir": "/Users/masoomeshafiee/Downloads/Results_1_20251007_Nup59_mNG_25_laser/integrated_intensity_result"
+  },
 
   "stats_summary": true,
   "plot_copy_number": true,
