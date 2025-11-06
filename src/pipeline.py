@@ -10,6 +10,7 @@ from save_metadata import save_full_metadata
 import logging
 import json
 import numpy as np
+from get_mNG_intensity import get_single_mNG_intensity
 
 # Set up logging
 logging.basicConfig(
@@ -18,7 +19,7 @@ logging.basicConfig(
     datefmt='%Y-%m-%d %H:%M:%S'
 )
 # Define CONFIG_PATH relative to this file's location
-CONFIG_PATH = os.path.join(os.path.dirname(__file__), "..", "config.json")
+CONFIG_PATH = os.path.join(os.path.dirname(__file__), "..", "config.template.json")
 
 def load_config(config_path="config.json"):
     with open(config_path, "r") as config_file:
@@ -32,6 +33,20 @@ def main():
     Path_settings = config["Path_settings"]
     Plot_settings = config["Plot_settings"]
     output_dir = Path_settings["output_dir"]
+
+    # Setep 0: Get the single mNG intensity if required (Optional)
+    if config["get_single_mNG_intensity"]["integrated_intensity_analysis"]:
+        logging.info("Starting integrated intensity analysis to get single mNG intensity...")
+        single_mNG_intensity = get_single_mNG_intensity(config["get_single_mNG_intensity"])
+
+        if single_mNG_intensity is not None:
+            logging.info(f"Integrated intensity analysis completed. Single mNG intensity: {single_mNG_intensity:.2f}, check plot saved in output_dir")
+        else:
+            logging.error("Integrated intensity analysis failed. Aborting processing.")
+        return
+    else:
+        logging.info(f"Skipping integrated intensity analysis as per configuration. Using existing single mNG intensity value.")
+    
 
     # Step 1: Loading the preprocessed data 
     logging.info("Loading GFP and RFP stacks...")

@@ -244,7 +244,7 @@ def get_single_mNG_intensity(get_single_mNG_intensity):
     return single_mNG_intensity
 
 
-
+"""
 conf=  {"data_path": "/Users/masoomeshafiee/Downloads/Results_1_20251007_Nup59_mNG_25_laser",
   "column_name": "Intens",
   "output_dir": "/Users/masoomeshafiee/Downloads/Results_1_20251007_Nup59_mNG_25_laser/integrated_intensity_result"}
@@ -252,3 +252,5 @@ conf=  {"data_path": "/Users/masoomeshafiee/Downloads/Results_1_20251007_Nup59_m
 single_mNG_intensity = get_single_mNG_intensity(conf)
 
 print(f"Estimated single mNG intensity: {single_mNG_intensity:.2f}")
+
+"""
