@@ -26,8 +26,9 @@ def load_integrated_intensity(folder_path):
             file_path = os.path.join(folder_path, file_name)
             try:
                 # read the xlsx file
-                current_df = pd.read_excel(file_path)
-                #current_df = pd.read_csv(file_path)
+                #current_df = pd.read_excel(file_path)
+                # read the csv file
+                current_df = pd.read_csv(file_path)
                 # add the file name as a column after the indext ( second column) to identify the source 
                 current_df.insert(1, "file_name", file_name)
                 all_date.append(current_df)
@@ -139,7 +140,7 @@ def fit_integrated_intensity(df, column_name="Intens"):
     logging.info(f"Fitted single mNG intensity: {single_mNG_intensity:.2f}")
     return single_mNG_intensity, fit_params, fig
 
-def fit_integrated_intensity_2(df, column_name="Intens", n_components=None, random_state=0):
+def fit_integrated_intensity_log(df, column_name="Intens", n_components=None, random_state=0):
     """
     Fit a GMM to log10(intensity). Overlay PDF on a histogram of log10 values.
     """
