@@ -245,13 +245,3 @@ def get_single_mNG_intensity(get_single_mNG_intensity):
     return single_mNG_intensity
 
 
-
-conf=  {"data_path": "/Users/masoomeshafiee/Desktop/test/test_mNG_extract",
-  "column_name": "Intensity",
-  "output_dir": "/Users/masoomeshafiee/Desktop/test/test_mNG_extract"}
-
-single_mNG_intensity = get_single_mNG_intensity(conf)
-
-print(f"Estimated single mNG intensity: {single_mNG_intensity:.2f}")
-
-
