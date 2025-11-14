@@ -22,10 +22,12 @@ def load_integrated_intensity(folder_path):
 
     all_date = []
     for file_name in os.listdir(folder_path):
-        if file_name.endswith(".csv"):
+        if file_name.endswith(".xlsx"):
             file_path = os.path.join(folder_path, file_name)
             try:
-                current_df = pd.read_csv(file_path)
+                # read the xlsx file
+                current_df = pd.read_excel(file_path)
+                #current_df = pd.read_csv(file_path)
                 # add the file name as a column after the indext ( second column) to identify the source 
                 current_df.insert(1, "file_name", file_name)
                 all_date.append(current_df)
@@ -40,7 +42,7 @@ def load_integrated_intensity(folder_path):
         logging.error("No CSV files found or failed to load any data.")
         raise ValueError("No data loaded from CSV files.")
     
-def clean_integrated_intensity_data(df, column_name="Intens"):
+def clean_integrated_intensity_data_1(df, column_name="Intens"):
     """
     Cleans the integrated intensity DataFrame by removing invalid entries, such as NaN values and negative intensities.
 
@@ -60,7 +62,7 @@ def clean_integrated_intensity_data(df, column_name="Intens"):
     return df_cleaned
 
 
-def clean_integrated_intensity_data_2(df, column_name="Intens",max_pct=99.5, iqr_k=3.0):
+def clean_integrated_intensity_data(df, column_name="Intens",max_pct=99.5, iqr_k=3.0):
     # to numeric
     s = pd.to_numeric(df[column_name], errors="coerce")
     s = s.replace([np.inf, -np.inf], np.nan).dropna()
@@ -125,7 +127,7 @@ def fit_integrated_intensity(df, column_name="Intens"):
 
     # Plot histogram and GMM fit
     fig, ax = plt.subplots(figsize=(10, 6))
-    counts, bins, _ = ax.hist(integrated_intensities, bins=50, density=True, alpha=0.6, color='g', label='Data Histogram')
+    counts, bins, _ = ax.hist(integrated_intensities, bins=20, density=True, alpha=0.6, color='g', label='Data Histogram')
     x = np.linspace(bins[0], bins[-1], 1000).reshape(-1, 1)
     logprob = gmm.score_samples(x)
     pdf = np.exp(logprob)
@@ -183,7 +185,7 @@ def fit_integrated_intensity_2(df, column_name="Intens", n_components=None, rand
 
     # Plot: histogram of log10 values + GMM PDF (in log space)
     fig, ax = plt.subplots(figsize=(10, 6))
-    counts, bins, _ = ax.hist(logI.ravel(), bins=30, density=True, alpha=0.6, label="Data (log10)")
+    counts, bins, _ = ax.hist(logI.ravel(), bins=15, density=True, alpha=0.6, label="Data (log10)")
     x_log = np.linspace(bins[0], bins[-1], 100).reshape(-1, 1)
     pdf_log = np.exp(gmm.score_samples(x_log))     # density in log space
     ax.plot(x_log, pdf_log, "-k", label="GMM fit")
@@ -220,7 +222,7 @@ def get_single_mNG_intensity(get_single_mNG_intensity):
     cleaned_df = clean_integrated_intensity_data(integrated_intensity_df, column_name=column_name)
 
     # Fit the data to find single mNG intensity
-    single_mNG_intensity, fit_params, fig = fit_integrated_intensity_2(cleaned_df, column_name=column_name, n_components=1, random_state=0)
+    single_mNG_intensity, fit_params, fig = fit_integrated_intensity(cleaned_df, column_name=column_name)
 
 
     # Save the plot
@@ -239,18 +241,17 @@ def get_single_mNG_intensity(get_single_mNG_intensity):
     cleaned_df.to_csv(cleaned_data_path, index=False)
     logging.info(f"Saved cleaned integrated intensity data to: {cleaned_data_path}")
 
-    print(cleaned_df["Intens"].describe(percentiles=[.01,.1,.5,.9,.99]))
-
+    
     return single_mNG_intensity
 
 
-"""
-conf=  {"data_path": "/Users/masoomeshafiee/Downloads/Results_1_20251007_Nup59_mNG_25_laser",
-  "column_name": "Intens",
-  "output_dir": "/Users/masoomeshafiee/Downloads/Results_1_20251007_Nup59_mNG_25_laser/integrated_intensity_result"}
+
+conf=  {"data_path": "/Users/masoomeshafiee/Desktop/test/test_mNG_extract",
+  "column_name": "Intensity",
+  "output_dir": "/Users/masoomeshafiee/Desktop/test/test_mNG_extract"}
 
 single_mNG_intensity = get_single_mNG_intensity(conf)
 
 print(f"Estimated single mNG intensity: {single_mNG_intensity:.2f}")
 
-"""
+
